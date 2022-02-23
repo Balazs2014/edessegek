@@ -11,7 +11,28 @@ class Candy extends Model
 
     protected $fillable = ['name', 'cocoa_content', 'sugar_content'];
 
-    public static function csokisakCukortartalma() {
-        return 2;
+    public static function csokisakCukortartalma() : float {
+        $atlag = Candy::where('cocoa_content', '>', 0)
+            ->average('sugar_content');
+        if ($atlag === null) {
+            return NAN;
+        }
+        return $atlag;
+
+        /*$candies = Candy::all();
+
+        $sum = 0;
+        $count = 0;
+        foreach ($candies as $candy) {
+            if ($candy->cocoa_content > 0) {
+                $sum += $candy->sugar_content;
+                $count++;
+            }
+        }
+        if($count === 0) {
+            return NAN;
+        }
+
+        return floatval($sum) / $count;*/
     }
 }
