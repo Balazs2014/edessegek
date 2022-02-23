@@ -19,6 +19,7 @@ class Candy extends Model
         }
         return $atlag;
 
+
         /*$candies = Candy::all();
 
         $sum = 0;
